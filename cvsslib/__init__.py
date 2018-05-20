@@ -1,5 +1,5 @@
 from .mixin import class_mixin
-from . import cvss3, cvss2
+from . import cvss3, cvss2, rvss
 
 
 def make_display_name(str):
