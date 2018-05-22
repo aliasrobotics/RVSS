@@ -23,7 +23,7 @@ setup(
                      '(https://github.com/ctxis/cvsslib) for examples and documentation.',
     install_requires=requirements,
     entry_points={
-        'console_scripts': ['cvss=cvsslib.command:main'],
+        'console_scripts': ['cvss=cvsslib.command:main', 'rvss=cvsslib.command2:main'],
     },
     classifiers=[
         'Framework :: Django',
