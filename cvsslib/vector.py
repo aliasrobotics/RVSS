@@ -96,6 +96,9 @@ def parse_vector(vector, module=None, mandatory_error=True):
         if key == "CVSS":
             continue  # CVSS3 is prefixed with CVSS:3.0/
 
+        if key == "RVSS":
+            continue  # RVSS1 is prefixed with RVSS:1.0/
+
         if key not in vector_map:
             raise VectorError("Unknown key {0} in {1} vector".format(key, module.__name__))
 
