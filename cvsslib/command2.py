@@ -1,5 +1,6 @@
 from cvsslib.vector import detect_vector, calculate_vector, VectorError
-from cvsslib import cvss2, cvss3
+# from cvsslib import cvss2, cvss3, rvss
+from cvsslib import rvss
 import argparse
 
 
@@ -15,6 +16,9 @@ def main():
         module = {2: cvss2, 3: cvss3}[args.version]
     else:
         module = detect_vector(args.vector)
+
+    if not(module):
+        raise NotImplementedError("module not detected")
 
     try:
         results = calculate_vector(args.vector, module)

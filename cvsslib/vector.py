@@ -1,6 +1,6 @@
 import operator
 
-from cvsslib import cvss3, cvss2
+from cvsslib import cvss3, cvss2, rvss
 from cvsslib.utils import get_enums, run_calc
 
 
@@ -10,10 +10,17 @@ class VectorError(ValueError):
 
 
 def detect_vector(vector):
-    if vector.startswith("CVSS:3.0"):
-        module = cvss3
+    if vector.startswith("CVSS"):
+        if vector.startswith("CVSS:3.0"):
+            module = cvss3
+        else:
+            module = cvss2
     else:
-        module = cvss2
+        if vector.startswith("RVSS:1.0"):
+            module = rvss
+        else:
+            module = None
+
 
     return module
 
