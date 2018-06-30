@@ -11,11 +11,17 @@ class AttackVector(BaseEnum):
     Vector: AV
     Mandatory: yes
     """
-    NETWORK = D("0.85")
+    # NETWORK = D("0.85")
+    # ADJACENT_NETWORK = D("0.62")
+    # LOCAL = D("0.55")
+    # PHYSICAL = D("0.2")
+    NETWORK_NETWORK = D("0.85")
     ADJACENT_NETWORK = D("0.62")
+    INTERNAL_NETWORK = D("0.4")
     LOCAL = D("0.55")
-    PHYSICAL = D("0.2")
-
+    PHYSICAL_PUBLIC = D("0.62")
+    PHYSICAL_RESTRICTED = D("0.4")
+    PHYSICAL_ISOLATED = D("0.2")
 
 class AttackComplexity(BaseEnum):
     """
