@@ -1,11 +1,16 @@
 # CVSSlib [![Build Status](https://travis-ci.org/ctxis/cvsslib.svg?branch=master)](https://travis-ci.org/ctxis/cvsslib)
 
 A Python 3 library for calculating CVSS v2 and CVSS v3 vectors, with tests. Examples on how to use
-the library is shown below, and there is some documentation on the internals within the `docs` directory. The library 
+the library is shown below, and there is some documentation on the internals within the `docs` directory. The library
 is designed to be completely extendable, so it is possible to implement your own custom scoring systems (or those of your clients)
 and have it work with the same API, and with the same bells and whistles.
 
 **Python 3 only**
+
+## Install
+```bash
+python3 setup.py install
+```
 
 ## API
 
@@ -35,9 +40,9 @@ value = cvss2.ReportConfidence.CONFIRMED
 if value != cvss2.ReportConfidence.NOT_DEFINED:
     do_something()
 ```  
-        
+
 There are some powerful mixin functions if you need a class with CVSS members. These functions
-take a cvss version and return a base class you can inherit from. This class hassome utility functions like 
+take a cvss version and return a base class you can inherit from. This class hassome utility functions like
 `to_vector()` and `from_vector()` you can use.
 
 ```python
@@ -49,7 +54,7 @@ class SomeObject(BaseClass):
     def print_stats(self):
         for item, value in self.enums:
             print("{0} is {1}".format(item, value)
- 
+
 state = SomeObject()
 print("\n".join(state.debug()))
 print(state.calculate())
@@ -72,7 +77,7 @@ CVSSBase = django_mixin(cvss2)
 
 class CVSSModel(models.Model, metaclass=CVSSBase)
     pass
-    
+
 # CVSSModel now has lots of enum you can use
 x = CVSSModel()
 x.save()
@@ -85,25 +90,25 @@ should match the attribute name it is being assigned to:
 ```python
 CVSSBase = django_mixin(cvss2, attr_name="CVSSBase")
 ```
- 
+
 And there is a command line tool available:
- 
+
 ```python
 > cvss CVSS:3.0/AV:L/AC:H/PR:H/UI:N/S:C/C:N/I:H/A:N/E:P/RL:U/RC:U/CR:H/IR:L/AR:H/MAV:L/MUI:R/MS:C/MC:N/MI:L/MA:N
 Base Score:     5.3
 Temporal:       4.6
 Environment:    1.3
 ```
- 
+
 ## Custom Scoring Systems
 
-Creating a new scoring system is very simple. First create a Python file with the correct name, e.g `super_scores.py`. 
+Creating a new scoring system is very simple. First create a Python file with the correct name, e.g `super_scores.py`.
 Next create some enums with the correct values for your system:
- 
+
 ```python
  from cvsslib.base_enum import BaseEnum
- 
- 
+
+
  class Risk(BaseEnum):
      """
      Vector: S
@@ -111,7 +116,7 @@ Next create some enums with the correct values for your system:
      HIGH = 1
      MEDIUM = 2
      LOW = 3
-     
+
  class Difficulty(BaseEnum):
      """
      Vector: D
@@ -120,8 +125,8 @@ Next create some enums with the correct values for your system:
      MODERATE = 2
      EASY = 3
 ```
- 
-And lastly add a `calculate` function in the module that accepts some vector values and 
+
+And lastly add a `calculate` function in the module that accepts some vector values and
 returns a result of some kind:
 
 ```python
@@ -129,11 +134,11 @@ returns a result of some kind:
 def calculate(difficulty: Difficulty, risk: Risk):
    if difficulty == Difficulty.EASY and risk == Risk.CRITICAL:
        return "oh nuts you're screwed"
-   
+
    return "You're probs ok m8"
 ```
 
-Once you define this you can pass your `super_scores` module to any 
-cvsslib function like `calculate_vector` or `django_mixin` and it will 
-all just work. You can even serialize the data to and from a vector 
+Once you define this you can pass your `super_scores` module to any
+cvsslib function like `calculate_vector` or `django_mixin` and it will
+all just work. You can even serialize the data to and from a vector
 if you define the correct `vector: X` in the enum docstrings.

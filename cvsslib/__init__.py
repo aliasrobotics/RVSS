@@ -15,4 +15,7 @@ class CVSS2State(class_mixin(cvss2)):
 class CVSS3State(class_mixin(cvss3)):
     pass
 
+class RVSSState(class_mixin(rvss)):
+    pass
+
 from .vector import parse_vector, calculate_vector
