@@ -1,5 +1,7 @@
 # CVSSlib [![Build Status](https://travis-ci.org/ctxis/cvsslib.svg?branch=master)](https://travis-ci.org/ctxis/cvsslib)
 
+Originally forked from https://github.com/ctxis/cvsslib.
+
 A Python 3 library for calculating CVSS v2 and CVSS v3 vectors, with tests. Examples on how to use
 the library is shown below, and there is some documentation on the internals within the `docs` directory. The library
 is designed to be completely extendable, so it is possible to implement your own custom scoring systems (or those of your clients)
