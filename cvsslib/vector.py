@@ -103,6 +103,7 @@ def parse_vector(vector, module=None, mandatory_error=True):
             raise VectorError("Unknown key {0} in {1} vector".format(key, module.__name__))
 
         enum = vector_map[key]
+        # print(enum)
         try:
             value_from_key = enum.get_value_from_vector_key(value)
         except RuntimeError as e:

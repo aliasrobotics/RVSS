@@ -5,8 +5,15 @@ from cvsslib.utils import get_enums
 
 # TODO: bring this vector to "example_vectors.py" file
 rvss_vectors = [
+    # Various tests for the attack vector (AV)
     ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (5.8, 5.8, 7.1)),
-    ("RVSS:1.0/AV:RN/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (5.8, 5.8, 7.1)),
+    ("RVSS:1.0/AV:RN/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (6.1, 6.1, 8.1)),
+    ("RVSS:1.0/AV:AN/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (5.9, 5.9, 7.3)),
+    ("RVSS:1.0/AV:PP/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (5.9, 5.9, 7.3)),
+    ("RVSS:1.0/AV:PI/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (5.4, 5.4, 5.9)),
+    # AV combinations
+    ("RVSS:1.0/AV:ANPR/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (5.5, 5.5, 6.1)),
+    ("RVSS:1.0/AV:PPL/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (5.6, 5.6, 6.4)),
 ]
 
 def test_v3_vectors():
@@ -25,7 +32,7 @@ def test_rvss_vectors():
 
 
 # test_v3_vectors()
-test_rvss_vectors()
+# test_rvss_vectors()
 
 ###########
 ## Individual tests
@@ -33,6 +40,3 @@ test_rvss_vectors()
 
 # vector_v3 = "CVSS:3.0/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N"
 # print(calculate_vector(vector_v3, cvss3))
-
-# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N"
-# print(calculate_vector(vector_rvss, rvss))

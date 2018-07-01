@@ -39,7 +39,7 @@ class BaseEnum(enum.Enum):
         return (
             (name, value) for name, value in self.__members__.items() if not name.startswith("_")
         )
-    
+
     @classmethod
     def get_default(cls):
         if hasattr(cls, "NOT_DEFINED"):
@@ -72,6 +72,7 @@ class BaseEnum(enum.Enum):
     @lru_cache()
     def get_value_from_vector_key(cls, key):
         key = key.lower()
+        # print(key)
 
         if key in {"x", "nd"} and hasattr(cls, "NOT_DEFINED"):
             return cls.NOT_DEFINED
@@ -84,11 +85,14 @@ class BaseEnum(enum.Enum):
         if key in vector_override:
             return getattr(cls, vector_override[key])
 
+        # print(cls.members())
         for name, value in cls.members():
+            # print(name.lower())
             if name == "NOT_DEFINED" or name in vector_override.values():
                 continue
 
             if name[0].lower() == key:
+                # print(type(value))
                 return value
 
         raise RuntimeError("Unknown vector key '{0}' for {1}".format(key, cls.__name__))
