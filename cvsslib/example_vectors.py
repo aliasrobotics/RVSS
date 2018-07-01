@@ -62,11 +62,13 @@ v2_vectors = [
     ("AV:N/AC:L/Au:N/C:C/I:C/A:C", (10, None, None))
 ]
 
+# TODO update
 rvss_vectors = [
     ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (5.8, 5.8, 7.1)),
     # ("RVSS:1.0/AV:RN/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N", (5.8, 5.8, 7.1)),
 ]
 
+# TODO update
 rvss_comparison_vectors = [
     ("AV:N/AC:L/Au:N/C:C/I:C/A:C", "AV:N/AC:L/Au:N/C:C/I:C/A:C", (10, None, None))
 ]

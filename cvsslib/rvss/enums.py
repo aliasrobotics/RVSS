@@ -91,6 +91,22 @@ class UserInteraction(BaseEnum):
     NONE = D("0.85")
     REQUIRED = D("0.62")
 
+class Age(BaseEnum):
+    """
+    Vector: Y
+    Mandatory: yes
+    """
+    YEAR1 = D("1.5")
+    YEARS3 = D("1.2")
+    MORE3YEARS = D("1.0")
+    UNKNOWN = D("1.0")
+
+    _vectors = {
+        "1": "YEAR1",
+        "3": "YEARS3",
+        "O": "MORE3YEARS",
+        "U": "1YEAR",
+    }
 
 class Scope(BaseEnum):
     """
@@ -208,6 +224,9 @@ ModifiedPrivilegesRequired = PrivilegeRequired.extend("ModifiedPrivilegesRequire
 ModifiedUserInteraction = UserInteraction.extend("ModifiedUserInteraction", {"NOT_DEFINED": NotDefined()},
                                                  "Vector: MUI")
 
+ModifiedAge = Age.extend("ModifiedAge", {"NOT_DEFINED": NotDefined()},
+                                                 "Vector: MY")
+
 ModifiedScope = Scope.extend("ModifiedScope", {"NOT_DEFINED": NotDefined()}, "Vector: MS")
 
 ModifiedConfidentialityImpact = ConfidentialityImpact.extend("ModifiedConfidentialityImpact",
@@ -220,7 +239,7 @@ ModifiedAvailabilityImpact = AvailabilityImpact.extend("ModifiedAvailabilityImpa
 
 OPTIONAL_VALUES = {
     ModifiedAttackVector, ModifiedAttackComplexity, ModifiedPrivilegesRequired,
-    ModifiedUserInteraction, ModifiedScope, ModifiedConfidentialityImpact,
+    ModifiedUserInteraction, ModifiedAge, ModifiedScope, ModifiedConfidentialityImpact,
     ModifiedIntegrityImpact, ModifiedAvailabilityImpact
 }
 
@@ -229,6 +248,7 @@ ORDERING = (
     AttackComplexity,
     PrivilegeRequired,
     UserInteraction,
+    Age,
 
     Scope,
     ConfidentialityImpact,
@@ -247,6 +267,7 @@ ORDERING = (
     ModifiedAttackComplexity,
     ModifiedPrivilegesRequired,
     ModifiedUserInteraction,
+    ModifiedAge,
     ModifiedScope,
 
     ModifiedConfidentialityImpact,

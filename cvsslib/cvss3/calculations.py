@@ -26,6 +26,9 @@ def calculate_modified_exploitability_sub_score(vector: ModifiedAttackVector,
                                                 complexity: ModifiedAttackComplexity,
                                                 privilege: ModifiedPrivilegesRequired,
                                                 interaction: ModifiedUserInteraction):
+    # print("modified complexity: " + str(complexity))
+    # print("modified privilege: " + str(privilege))
+    # print("modified interaction: " + str(interaction))
     return EXPLOITABILITY_COEFFECIENT * vector * complexity * privilege * interaction
 
 

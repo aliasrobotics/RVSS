@@ -17,15 +17,34 @@ def roundup(num):
 def calculate_exploitability_sub_score(attack_vector: AttackVector,
                                        complexity: AttackComplexity,
                                        privilege: PrivilegeRequired,
-                                       interaction: UserInteraction):
-    return EXPLOITABILITY_COEFFECIENT * attack_vector * complexity * privilege * interaction
+                                       interaction: UserInteraction,
+                                       age:Age):
+    # print("age: " + str(age))
+    return EXPLOITABILITY_COEFFECIENT * attack_vector * complexity * privilege * interaction * age
+
+# def calculate_exploitability_sub_score(attack_vector: AttackVector,
+#                                        complexity: AttackComplexity,
+#                                        privilege: PrivilegeRequired,
+#                                        interaction: UserInteraction):
+#     return EXPLOITABILITY_COEFFECIENT * attack_vector * complexity * privilege * interaction
 
 
 def calculate_modified_exploitability_sub_score(vector: ModifiedAttackVector,
                                                 complexity: ModifiedAttackComplexity,
                                                 privilege: ModifiedPrivilegesRequired,
-                                                interaction: ModifiedUserInteraction):
-    return EXPLOITABILITY_COEFFECIENT * vector * complexity * privilege * interaction
+                                                interaction: ModifiedUserInteraction,
+                                                age: ModifiedAge):
+    # print("modified complexity: " + str(complexity))
+    # print("modified privilege: " + str(privilege))
+    # print("modified interaction: " + str(interaction))
+    # print("modified age: " + str(age))
+    return EXPLOITABILITY_COEFFECIENT * vector * complexity * privilege * interaction * age
+
+# def calculate_modified_exploitability_sub_score(vector: ModifiedAttackVector,
+#                                                 complexity: ModifiedAttackComplexity,
+#                                                 privilege: ModifiedPrivilegesRequired,
+#                                                 interaction: ModifiedUserInteraction):
+#     return EXPLOITABILITY_COEFFECIENT * vector * complexity * privilege * interaction
 
 
 def calculate_impact_sub_score(scope: Scope,

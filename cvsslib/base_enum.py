@@ -83,6 +83,7 @@ class BaseEnum(enum.Enum):
             vector_override = cls._vectors.value
 
         if key in vector_override:
+            # print(getattr(cls, vector_override[key]))
             return getattr(cls, vector_override[key])
 
         # print(cls.members())
