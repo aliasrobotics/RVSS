@@ -22,13 +22,6 @@ def calculate_exploitability_sub_score(attack_vector: AttackVector,
     # print("age: " + str(age))
     return EXPLOITABILITY_COEFFECIENT * attack_vector * complexity * privilege * interaction * age
 
-# def calculate_exploitability_sub_score(attack_vector: AttackVector,
-#                                        complexity: AttackComplexity,
-#                                        privilege: PrivilegeRequired,
-#                                        interaction: UserInteraction):
-#     return EXPLOITABILITY_COEFFECIENT * attack_vector * complexity * privilege * interaction
-
-
 def calculate_modified_exploitability_sub_score(vector: ModifiedAttackVector,
                                                 complexity: ModifiedAttackComplexity,
                                                 privilege: ModifiedPrivilegesRequired,
@@ -40,18 +33,21 @@ def calculate_modified_exploitability_sub_score(vector: ModifiedAttackVector,
     # print("modified age: " + str(age))
     return EXPLOITABILITY_COEFFECIENT * vector * complexity * privilege * interaction * age
 
-# def calculate_modified_exploitability_sub_score(vector: ModifiedAttackVector,
-#                                                 complexity: ModifiedAttackComplexity,
-#                                                 privilege: ModifiedPrivilegesRequired,
-#                                                 interaction: ModifiedUserInteraction):
-#     return EXPLOITABILITY_COEFFECIENT * vector * complexity * privilege * interaction
-
 
 def calculate_impact_sub_score(scope: Scope,
                                conf_impact: ConfidentialityImpact,
                                integ_impact: IntegrityImpact,
-                               avail_impact: AvailabilityImpact):
-    base_impact_sub_score = 1 - ((1 - conf_impact) * (1 - integ_impact) * (1 - avail_impact))
+                               avail_impact: AvailabilityImpact,
+                               safe_impact: SafetyImpact):
+
+
+   safety_weight = decimal.Decimal(1.2)
+    # base_impact_sub_score = 1 - ((1 - conf_impact) * (1 - integ_impact) * (1 - avail_impact)
+    #     * (1 - safe_impact))
+
+    base_impact_sub_score = safety_weight * safe_impact - ((1 - conf_impact) * (1 - integ_impact)
+                            * (1 - avail_impact))
+
 
     if scope == Scope.UNCHANGED.value:
         return IMPACT_UNCHANGED_COEFFECIENT * base_impact_sub_score
@@ -66,16 +62,36 @@ def calculate_modified_impact_sub_score(scope: ModifiedScope,
                                         modified_conf: ModifiedConfidentialityImpact,
                                         modified_integ: ModifiedIntegrityImpact,
                                         modified_avail: ModifiedAvailabilityImpact,
+                                        modified_safe: ModifiedSafetyImpact,
                                         conf_req: ConfidentialityRequirement,
                                         integ_req: IntegrityRequirement,
-                                        avail_req: AvailabilityRequirement):
-    modified = min(
-        1 -
-        (1 - modified_conf * conf_req) *
-        (1 - modified_integ * integ_req) *
-        (1 - modified_avail * avail_req),
-        0.915
-    )
+                                        avail_req: AvailabilityRequirement,
+                                        safe_req: SafetyRequirement):
+    # print(modified_safe)
+    # print(safe_req)
+
+    # modified = min(
+    #     1 -
+    #     (1 - modified_conf * conf_req) *
+    #     (1 - modified_integ * integ_req) *
+    #     (1 - modified_avail * avail_req) *
+    #     (1 - modified_safe * safe_req),
+    #     0.915
+    # )
+
+    safety_weight = decimal.Decimal(1.2)
+
+    # modified = min(
+    #     safety_weight * modified_safe * safe_req -
+    #     (1 - modified_conf * conf_req) *
+    #     (1 - modified_integ * integ_req) *
+    #     (1 - modified_avail * avail_req),
+    #     0.915
+    # )
+
+    modified = safety_weight * modified_safe * safe_req - (1 - modified_conf * conf_req) \
+        * (1 - modified_integ * integ_req) * (1 - modified_avail * avail_req)
+
 
     if scope == ModifiedScope.UNCHANGED.value:
         # print("calculating")
@@ -126,6 +142,7 @@ def calculate_environmental_score(run_calculation,
                                   privilege: ModifiedPrivilegesRequired):
 
     modified_impact_sub_score = run_calculation(calculate_modified_impact_sub_score)
+    # print(modified_impact_sub_score)
 
     if modified_impact_sub_score <= 0:
         return 0

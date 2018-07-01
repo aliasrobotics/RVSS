@@ -57,11 +57,18 @@ def comparison_rvss_vectors():
         assert results == score2, "Vector {0} failed".format(vector2)
         assert score1 == score2, "CVSS and RVSS vectors' score don't match "
 
+def test_age_rvss():
+    score1 = calculate_vector("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:3/S:U/C:H/I:N/A:H/MPR:N", rvss)
+    score2 = calculate_vector("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:1/S:U/C:H/I:N/A:H/MPR:N", rvss)
+    assert max(score1) < max(score2), "Age test failed"
+
+
+
 
 ## Run tests
-# test_v3_vectors()
-test_rvss_vectors()
-comparison_rvss_vectors()
+# test_rvss_vectors()
+# comparison_rvss_vectors()
+# test_age_rvss()
 
 ###########
 ## Individual tests
@@ -70,11 +77,40 @@ comparison_rvss_vectors()
 # vector_v3 = "CVSS:3.0/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N"
 # print(calculate_vector(vector_v3, cvss3))
 #
-# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/MPR:N"
+
+# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:U/MPR:N"
 # print(calculate_vector(vector_rvss, rvss))
 #
-# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:3/S:U/C:H/I:N/A:H/MPR:N"
+# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:E/MPR:N"
 # print(calculate_vector(vector_rvss, rvss))
 #
-# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:1/S:U/C:H/I:N/A:H/MPR:N"
+# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:E/MPR:N/HR:H"
 # print(calculate_vector(vector_rvss, rvss))
+
+vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:N"
+print(calculate_vector(vector_rvss, rvss), "safety: None")
+
+vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:U"
+print(calculate_vector(vector_rvss, rvss), "safety: Unknown")
+
+vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:E"
+print(calculate_vector(vector_rvss, rvss), "Safety: Environmental")
+
+vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:H"
+print(calculate_vector(vector_rvss, rvss), "safety: Human")
+
+vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:E/MH:H"
+print(calculate_vector(vector_rvss, rvss), "safety: environmental, modified safety: human")
+
+vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:H/HR:H"
+print(calculate_vector(vector_rvss, rvss), "safety: Human, safety requirement: high")
+
+vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:H/MPR:N"
+print(calculate_vector(vector_rvss, rvss), "modified priviledges, no privs required")
+
+# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:E/HR:H/MH:H"
+# print(calculate_vector(vector_rvss, rvss))
+#
+# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:E/HR:H/MPR:N/MH:H"
+# print(calculate_vector(vector_rvss, rvss))
+#

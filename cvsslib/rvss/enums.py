@@ -104,8 +104,8 @@ class Age(BaseEnum):
     _vectors = {
         "1": "YEAR1",
         "3": "YEARS3",
-        "O": "MORE3YEARS",
-        "U": "1YEAR",
+        "o": "MORE3YEARS",
+        "u": "UNKNOWN",
     }
 
 class Scope(BaseEnum):
@@ -146,6 +146,23 @@ class AvailabilityImpact(BaseEnum):
     HIGH = D("0.56")
     LOW = D("0.22")
     NONE = D("0")
+
+class SafetyImpact(BaseEnum):
+    """
+    Vector: H
+    Mandatory: yes
+    """
+    NONE = D("0.4")
+    UNKNOWN = D("0.5")
+    ENVIRONMENTAL = D("0.7")
+    HUMAN = D("1.0")
+
+    _vectors = {
+        "u": "UNKNOWN",
+        "n": "NONE",
+        "e": "ENVIRONMENTAL",
+        "h": "HUMAN",
+    }
 
 
 # Temporal metrics
@@ -210,6 +227,14 @@ class AvailabilityRequirement(BaseEnum):
     MEDIUM = D("1")
     LOW = D("0.5")
 
+class SafetyRequirement(BaseEnum):
+    """
+    Vector: HR
+    """
+    NOT_DEFINED = NotDefined(D("1"))
+    HIGH = D("1.5")
+    MEDIUM = D("1")
+    LOW = D("0.5")
 
 ModifiedAttackVector = AttackVector.extend("ModifiedAttackVector",
                                            {"NOT_DEFINED": NotDefined()},
@@ -237,10 +262,14 @@ ModifiedIntegrityImpact = IntegrityImpact.extend("ModifiedIntegrityImpact", {"NO
 ModifiedAvailabilityImpact = AvailabilityImpact.extend("ModifiedAvailabilityImpact", {"NOT_DEFINED": NotDefined()},
                                                        "Vector: MA")
 
+ModifiedSafetyImpact = SafetyImpact.extend("ModifiedSafetyImpact", {"NOT_DEFINED": NotDefined()},
+                                                       "Vector: MH")
+
+
 OPTIONAL_VALUES = {
     ModifiedAttackVector, ModifiedAttackComplexity, ModifiedPrivilegesRequired,
     ModifiedUserInteraction, ModifiedAge, ModifiedScope, ModifiedConfidentialityImpact,
-    ModifiedIntegrityImpact, ModifiedAvailabilityImpact
+    ModifiedIntegrityImpact, ModifiedAvailabilityImpact, ModifiedSafetyImpact
 }
 
 ORDERING = (
@@ -254,6 +283,7 @@ ORDERING = (
     ConfidentialityImpact,
     IntegrityImpact,
     AvailabilityImpact,
+    SafetyImpact,
 
     ExploitCodeMaturity,
     RemediationLevel,
@@ -262,6 +292,7 @@ ORDERING = (
     ConfidentialityRequirement,
     IntegrityRequirement,
     AvailabilityRequirement,
+    SafetyRequirement,
 
     ModifiedAttackVector,
     ModifiedAttackComplexity,
@@ -272,5 +303,6 @@ ORDERING = (
 
     ModifiedConfidentialityImpact,
     ModifiedIntegrityImpact,
-    ModifiedAvailabilityImpact
+    ModifiedAvailabilityImpact,
+    ModifiedSafetyImpact
 )
