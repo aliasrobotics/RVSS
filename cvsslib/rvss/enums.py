@@ -152,10 +152,17 @@ class SafetyImpact(BaseEnum):
     Vector: H
     Mandatory: yes
     """
-    NONE = D("0.4")
-    UNKNOWN = D("0.5")
-    ENVIRONMENTAL = D("0.7")
-    HUMAN = D("1.0")
+    # # safety setup 1
+    # NONE = D("0.4")
+    # UNKNOWN = D("0.5")
+    # ENVIRONMENTAL = D("0.7")
+    # HUMAN = D("1.0")
+
+    # safety setup 2
+    NONE = D("0")
+    UNKNOWN = D("0")
+    ENVIRONMENTAL = D("0.15")
+    HUMAN = D("0.35")
 
     _vectors = {
         "u": "UNKNOWN",

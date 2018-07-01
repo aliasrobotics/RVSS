@@ -41,12 +41,14 @@ def calculate_impact_sub_score(scope: Scope,
                                safe_impact: SafetyImpact):
 
 
-   safety_weight = decimal.Decimal(1.2)
-    # base_impact_sub_score = 1 - ((1 - conf_impact) * (1 - integ_impact) * (1 - avail_impact)
-    #     * (1 - safe_impact))
+    safety_weight = decimal.Decimal(1.2)
+    # safety setup 2
+    base_impact_sub_score = 1 - ((1 - conf_impact) * (1 - integ_impact) * (1 - avail_impact)) \
+        + safety_weight * safe_impact
 
-    base_impact_sub_score = safety_weight * safe_impact - ((1 - conf_impact) * (1 - integ_impact)
-                            * (1 - avail_impact))
+    # # safety setup 1
+    # base_impact_sub_score = safety_weight * safe_impact - ((1 - conf_impact) * (1 - integ_impact)
+    #                         * (1 - avail_impact))
 
 
     if scope == Scope.UNCHANGED.value:
@@ -70,27 +72,18 @@ def calculate_modified_impact_sub_score(scope: ModifiedScope,
     # print(modified_safe)
     # print(safe_req)
 
-    # modified = min(
-    #     1 -
-    #     (1 - modified_conf * conf_req) *
-    #     (1 - modified_integ * integ_req) *
-    #     (1 - modified_avail * avail_req) *
-    #     (1 - modified_safe * safe_req),
-    #     0.915
-    # )
-
     safety_weight = decimal.Decimal(1.2)
+    # safety setup 2
+    modified = min(
+        1 -
+        (1 - modified_conf * conf_req) *
+        (1 - modified_integ * integ_req) *
+        (1 - modified_avail * avail_req),
+        0.915) + safety_weight * modified_safe * safe_req
 
-    # modified = min(
-    #     safety_weight * modified_safe * safe_req -
-    #     (1 - modified_conf * conf_req) *
-    #     (1 - modified_integ * integ_req) *
-    #     (1 - modified_avail * avail_req),
-    #     0.915
-    # )
-
-    modified = safety_weight * modified_safe * safe_req - (1 - modified_conf * conf_req) \
-        * (1 - modified_integ * integ_req) * (1 - modified_avail * avail_req)
+    # # safety setup 1
+    # modified = safety_weight * modified_safe * safe_req - (1 - modified_conf * conf_req) \
+    #     * (1 - modified_integ * integ_req) * (1 - modified_avail * avail_req)
 
 
     if scope == ModifiedScope.UNCHANGED.value:
