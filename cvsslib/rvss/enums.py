@@ -96,15 +96,15 @@ class Age(BaseEnum):
     Vector: Y
     Mandatory: yes
     """
-    YEAR1 = D("1.5")
-    YEARS3 = D("1.2")
+    ONEYEAR = D("1.5")
+    THREEYEARS = D("1.2")
     MORE3YEARS = D("1.0")
     UNKNOWN = D("1.0")
 
     _vectors = {
-        "1": "YEAR1",
-        "3": "YEARS3",
-        "o": "MORE3YEARS",
+        "o": "ONEYEAR",
+        "t": "THREEYEARS",
+        "m": "MORE3YEARS",
         "u": "UNKNOWN",
     }
 

@@ -15,16 +15,16 @@ rvss_vectors = [
     ("RVSS:1.0/AV:ANPR/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:N/MPR:N", (5.5, 5.5, 6.1)),
     ("RVSS:1.0/AV:PPL/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:N/MPR:N", (5.6, 5.6, 6.4)),
     # Age tests
-    ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:3/S:U/C:H/I:N/A:H/H:N/MPR:N", (5.9, 5.9, 7.4)),
-    ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:1/S:U/C:H/I:N/A:H/H:N/MPR:N", (6.1, 6.1, 8.0)),
+    ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:T/S:U/C:H/I:N/A:H/H:N/MPR:N", (5.9, 5.9, 7.4)),
+    ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:O/S:U/C:H/I:N/A:H/H:N/MPR:N", (6.1, 6.1, 8.0)),
 ]
 
 test_rvss_vectors = [
     ("RVSS:1.0/AV:PI/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:N/MPR:N"),
     ("RVSS:1.0/AV:ANPR/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:N/MPR:N"),
     ("RVSS:1.0/AV:PPL/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:N/MPR:N"),
-    ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:3/S:U/C:H/I:N/A:H/H:N/MPR:N"),
-    ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:1/S:U/C:H/I:N/A:H/H:N/MPR:N"),
+    ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:T/S:U/C:H/I:N/A:H/H:N/MPR:N"),
+    ("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:O/S:U/C:H/I:N/A:H/H:N/MPR:N"),
 ]
 
 rvss_comparison_vectors = [
@@ -102,10 +102,15 @@ def comparison_rvss_vectors():
         assert score1 == score2, "CVSS and RVSS vectors' score don't match "
 
 def test_age_rvss():
-    score1 = calculate_vector("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:3/S:U/C:H/I:N/A:H/H:N/MPR:N", rvss)
-    score2 = calculate_vector("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:1/S:U/C:H/I:N/A:H/H:N/MPR:N", rvss)
-    assert max(score1) < max(score2), "Age test failed"
+    score1 = calculate_vector("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:T/S:U/C:H/I:N/A:H/H:N/MPR:N", rvss)
+    score2 = calculate_vector("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:O/S:U/C:H/I:N/A:H/H:N/MPR:N", rvss)
+    assert max(score1) < max(score2), "Age test failed, Y:T is not less than Y:O"
 
+    score1 = calculate_vector("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:O/S:U/C:H/I:N/A:H/H:U", rvss)
+    # print(score1, max(score1))
+    score2 = calculate_vector("RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:T/S:U/C:H/I:N/A:H/H:U/MY:O", rvss)
+    # print(score2, max(score2))
+    assert max(score1) == max(score2), "Age test failed, Y:O is not equal to Y:T/MY:O"
 
 
 ## Run tests
@@ -120,6 +125,3 @@ test_safety_rvss()
 
 # vector_v3 = "CVSS:3.0/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:H/MPR:N"
 # print(calculate_vector(vector_v3, cvss3))
-
-# vector_rvss = "RVSS:1.0/AV:L/AC:L/PR:H/UI:R/Y:U/S:U/C:H/I:N/A:H/H:U"
-# print(calculate_vector(vector_rvss, rvss), "safety: Unknown")
