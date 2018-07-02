@@ -15,6 +15,7 @@ class AttackVector(BaseEnum):
     # ADJACENT_NETWORK = D("0.62")
     # LOCAL = D("0.55")
     # PHYSICAL = D("0.2")
+
     REMOTE_NETWORK = D("0.85")
     ADJACENT_NETWORK = D("0.62")
     INTERNAL_NETWORK = D("0.4")
@@ -63,7 +64,6 @@ class AttackVector(BaseEnum):
         "pil": "PHYSICAL_ISOLATED_AND_LOCAL",
     }
 
-
 class AttackComplexity(BaseEnum):
     """
     Vector: AC
@@ -96,12 +96,14 @@ class Age(BaseEnum):
     Vector: Y
     Mandatory: yes
     """
-    ONEYEAR = D("1.5")
-    THREEYEARS = D("1.2")
-    MORE3YEARS = D("1.0")
+    ZERODAY = D("1.0")
+    ONEYEAR = D("1.1")
+    THREEYEARS = D("1.3")
+    MORE3YEARS = D("1.5")
     UNKNOWN = D("1.0")
 
     _vectors = {
+        "z": "ZERODAY",
         "o": "ONEYEAR",
         "t": "THREEYEARS",
         "m": "MORE3YEARS",
