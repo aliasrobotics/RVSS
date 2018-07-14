@@ -46,18 +46,35 @@ def calculate_impact_sub_score(scope: Scope,
     base_impact_sub_score = 1 - ((1 - conf_impact) * (1 - integ_impact) * (1 - avail_impact)) \
         + safety_weight * safe_impact
 
+    # base_impact_sub_score_old = 1 - ((1 - conf_impact) * (1 - integ_impact) * (1 - avail_impact))
+
+    print("actual: ", base_impact_sub_score)
+    # print("old: ", base_impact_sub_score_old)
+
     # # safety setup 1
     # base_impact_sub_score = safety_weight * safe_impact - ((1 - conf_impact) * (1 - integ_impact)
     #                         * (1 - avail_impact))
 
-
     if scope == Scope.UNCHANGED.value:
+        print("actual final: ", IMPACT_UNCHANGED_COEFFECIENT * base_impact_sub_score)
+        # print("old final: ",IMPACT_UNCHANGED_COEFFECIENT * base_impact_sub_score_old)
         return IMPACT_UNCHANGED_COEFFECIENT * base_impact_sub_score
     else:
-        # What they hell are people smoking...
-        return IMPACT_CHANGED_COEFFECIENT *\
-               (base_impact_sub_score - D("0.029")) -\
-               D("3.25") * D(math.pow(base_impact_sub_score - D("0.02"), 15))
+        if base_impact_sub_score > 1.0:
+            base_impact_sub_score = D(1.0) # trim the base_impact_sub_score
+            # Slighly modify the math so that it still rates as before
+            changed_value = IMPACT_CHANGED_COEFFECIENT *\
+                   (base_impact_sub_score - D("0.029")) -\
+                   D("3.25") * D(math.pow(base_impact_sub_score - D("0.04"), 15))
+            # print("changed_value: ", changed_value)
+            return changed_value
+
+        else:
+            changed_value = IMPACT_CHANGED_COEFFECIENT *\
+                   (base_impact_sub_score - D("0.029")) -\
+                   D("3.25") * D(math.pow(base_impact_sub_score - D("0.02"), 15))
+            # print("changed_value: ", changed_value)
+            return changed_value
 
 
 def calculate_modified_impact_sub_score(scope: ModifiedScope,
@@ -93,7 +110,15 @@ def calculate_modified_impact_sub_score(scope: ModifiedScope,
         # print(IMPACT_UNCHANGED_COEFFECIENT * decimal.Decimal(modified))
         return IMPACT_UNCHANGED_COEFFECIENT * decimal.Decimal(modified)
     else:
-        return IMPACT_CHANGED_COEFFECIENT * (decimal.Decimal(modified) - D("0.029")) - D("3.25") * D(math.pow(decimal.Decimal(modified) - D(0.02), 15))
+        if modified > 1.0:
+            modified = D(1.0) # trim the modified value
+            return IMPACT_CHANGED_COEFFECIENT * (decimal.Decimal(modified) - \
+                D("0.029")) - D("3.25") * \
+                D(math.pow(decimal.Decimal(modified) - D(0.04), 15))
+        else:
+            return IMPACT_CHANGED_COEFFECIENT * (decimal.Decimal(modified) - \
+                D("0.029")) - D("3.25") * \
+                D(math.pow(decimal.Decimal(modified) - D(0.02), 15))
 
 
 def calculate_base_score(run_calculation, scope: Scope, privilege: PrivilegeRequired):
