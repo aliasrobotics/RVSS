@@ -15,7 +15,11 @@ analysis_vectors = [
         "RVSS:1.0/AV:ANPR/AC:L/PR:N/UI:N/Y:T/S:U/C:N/I:H/A:H/H:E"),
     ("An attacker on an adjacent network could perform command injection.",
         "CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-        "RVSS:1.0/AV:AN/AC:L/PR:N/UI:N/Y:O/S:U/C:H/I:H/A:H/H:U"),
+        "RVSS:1.0/AV:AN/AC:L/PR:N/UI:N/Y:O/S:U/C:H/I:H/A:H/H:E"),
+    ("An stack-based buffer overflow in Universal Robots Modbus TCP service could allow remote attackers to execute arbitrary code and alter protected settings via specially crafted packets.",
+        "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+        "RVSS:1.0/AV:AN/AC:L/PR:N/UI:N/Y:T/S:C/C:H/I:H/A:H/H:H",
+    ),
 ]
 
 def comparison_rvss_vectors():
