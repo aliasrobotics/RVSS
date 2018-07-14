@@ -48,7 +48,7 @@ def calculate_impact_sub_score(scope: Scope,
 
     # base_impact_sub_score_old = 1 - ((1 - conf_impact) * (1 - integ_impact) * (1 - avail_impact))
 
-    print("actual: ", base_impact_sub_score)
+    # print("actual: ", base_impact_sub_score)
     # print("old: ", base_impact_sub_score_old)
 
     # # safety setup 1
@@ -56,7 +56,7 @@ def calculate_impact_sub_score(scope: Scope,
     #                         * (1 - avail_impact))
 
     if scope == Scope.UNCHANGED.value:
-        print("actual final: ", IMPACT_UNCHANGED_COEFFECIENT * base_impact_sub_score)
+        # print("actual final: ", IMPACT_UNCHANGED_COEFFECIENT * base_impact_sub_score)
         # print("old final: ",IMPACT_UNCHANGED_COEFFECIENT * base_impact_sub_score_old)
         return IMPACT_UNCHANGED_COEFFECIENT * base_impact_sub_score
     else:
