@@ -20,6 +20,10 @@ analysis_vectors = [
         "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
         "RVSS:1.0/AV:AN/AC:L/PR:N/UI:N/Y:T/S:C/C:H/I:H/A:H/H:H",
     ),
+    ("Vulnerabilities in robot middleware. Launching on arm64 with Fast-RTPS with fat archive from 2018-06-21 never quits.",
+        "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+        "RVSS:1.0/AV:AN/AC:L/PR:N/UI:N/Y:O/S:U/C:N/I:N/A:N/H:H",
+    ),
 ]
 
 def comparison_rvss_vectors():

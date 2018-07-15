@@ -16,7 +16,6 @@ class AttackVector(BaseEnum):
     LOCAL = D("0.55")
     PHYSICAL = D("0.2")
 
-
 class AttackComplexity(BaseEnum):
     """
     Vector: AC
