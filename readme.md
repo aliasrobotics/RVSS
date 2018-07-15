@@ -1,23 +1,62 @@
-# CVSSlib [![Build Status](https://travis-ci.org/ctxis/cvsslib.svg?branch=master)](https://travis-ci.org/ctxis/cvsslib)
+# Robot Vulnerability Scoring System (RVSS) Python 3 reference implementation.
 
-Originally forked from https://github.com/ctxis/cvsslib.
+*Work inspired by https://github.com/ctxis/cvsslib.*
 
-A Python 3 library for calculating CVSS v2 and CVSS v3 vectors, with tests. Examples on how to use
-the library is shown below, and there is some documentation on the internals within the `docs` directory. The library
-is designed to be completely extendable, so it is possible to implement your own custom scoring systems (or those of your clients)
-and have it work with the same API, and with the same bells and whistles.
+----
 
-**Python 3 only**
+- **Current version**: 1.0
+- **License**: GPLv3
+
+----
+
+This repository provides a Python 3 (*only Python 3*) library for calculating robot vulnerability scores. The library extends `cvsslib` to support the following scoring systems:
+- CVSSv2
+- CVSSv3
+- RVSSv1
+
+From the original README:
+
+> Examples on how to use the library is shown below, and there is some documentation on the internals within the `docs` directory. The library is designed to be completely extendable, so it is possible to implement your own custom scoring systems (or those of your clients) and have it work with the same API, and with the same bells and whistles.
+
+## How to cite our work
+```
+TODO
+```
 
 ## Install
 ```bash
 python3 setup.py install
 ```
 
+## Try it out
+#### RVSSv1
+```bash
+$ rvss RVSS:1.0/AV:AN/AC:L/PR:N/UI:N/Y:O/S:U/C:N/I:L/A:N/H:H
+Base Score:	7.3
+Temporal:	7.3
+Environment:	7.3
+```
+
+#### CVSSv3
+```bash
+$ rvss CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
+Base Score:	8.8
+Temporal:	8.8
+Environment:	8.8
+```
+
+#### CVSSv2
+```bash
+$ rvss CVSS:2.0/AV:L/AC:M/Au:N/C:N/I:P/A:C/E:POC/RL:W/RC:UR/CDP:LM/TD:H/CR:M/IR:L/AR:H
+Base Score:	5.4
+Temporal:	4.4
+Environment:	6.9
+```
+
+
 ## API
 
-It's pretty simple to use. `cvsslib` has a `cvss2` and `cvss3` sub modules that contains all of the enums
-and calculation code. There are also some functions to manipulate vectors that take these cvss modules
+It's pretty simple to use. `cvsslib` has a `cvss2`, `cvss3` and `rvss` sub modules that contains all of the enums and calculation code. There are also some functions to manipulate vectors that take these cvss modules
 as arguments. E.G:
 
 ```python
