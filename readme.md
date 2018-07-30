@@ -1,6 +1,6 @@
 # Robot Vulnerability Scoring System (RVSS) Python 3 reference implementation.
 
-*Work inspired by https://github.com/ctxis/cvsslib.*
+*Work inspired by https://github.com/ctxis/cvsslib. Paper available at https://arxiv.org/pdf/1807.10357.pdf*.
 
 ----
 
@@ -20,7 +20,22 @@ From the original README:
 
 ## How to cite our work
 ```
-TODO
+@ARTICLE{2018arXiv180710357M,
+   author = {{Mayoral Vilches}, V. and {Gil-Uriarte}, E. and {Zamalloa Ugarte}, I. and 
+	{Olalde Mendia}, G. and {Izquierdo Pis{\'o}n}, R. and {Alzola Kirschgens}, L. and 
+	{Bilbao Calvo}, A. and {Hern{\'a}ndez Cordero}, A. and {Apa}, L. and 
+	{Cerrudo}, C.},
+    title = "{Towards an open standard for assessing the severity of robot security vulnerabilities, the Robot Vulnerability Scoring System (RVSS)}",
+  journal = {ArXiv e-prints},
+archivePrefix = "arXiv",
+   eprint = {1807.10357},
+ primaryClass = "cs.RO",
+ keywords = {Computer Science - Robotics, Computer Science - Cryptography and Security},
+     year = 2018,
+    month = jul,
+   adsurl = {http://adsabs.harvard.edu/abs/2018arXiv180710357M},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 ```
 
 ## Install
