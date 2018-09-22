@@ -9,6 +9,8 @@
 
 ----
 
+![](rvss.jpg)
+
 This repository provides a Python 3 (*only Python 3*) library for calculating robot vulnerability scores. The library extends `cvsslib` to support the following scoring systems:
 - CVSSv2
 - CVSSv3
