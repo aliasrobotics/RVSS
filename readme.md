@@ -21,6 +21,8 @@ From the original README:
 > Examples on how to use the library is shown below, and there is some documentation on the internals within the `docs` directory. The library is designed to be completely extendable, so it is possible to implement your own custom scoring systems (or those of your clients) and have it work with the same API, and with the same bells and whistles.
 
 ## How to cite our work
+
+[![Article](https://img.shields.io/badge/article-arxiv%3A1812.09490-red.svg)](https://arxiv.org/pdf/1807.10357.pdf)
 ```
 @ARTICLE{2018arXiv180710357M,
    author = {{Mayoral Vilches}, V. and {Gil-Uriarte}, E. and {Zamalloa Ugarte}, I. and 
