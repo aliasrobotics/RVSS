@@ -22,7 +22,7 @@ From the original README:
 
 ## How to cite our work
 
-[![Article](https://img.shields.io/badge/article-arxiv%3A1812.09490-red.svg)](https://arxiv.org/pdf/1807.10357.pdf)
+[![Article](https://img.shields.io/badge/article-arxiv%3A1807.10357-red.svg)](https://arxiv.org/pdf/1807.10357.pdf)
 ```
 @ARTICLE{2018arXiv180710357M,
    author = {{Mayoral Vilches}, V. and {Gil-Uriarte}, E. and {Zamalloa Ugarte}, I. and 
