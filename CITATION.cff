@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use RVSS, please cite the paper below."
+title: Robot Vulnerability Scoring System (RVSS)
+type: software
+version: 0.5.5
+authors:
+  - name: Alias Robotics
+repository-code: https://github.com/aliasrobotics/RVSS
+url: https://cybersecurityrobotics.com/research/rvss-robot-vulnerability-scoring-system/
+preferred-citation:
+  type: article
+  title: "Towards an open standard for assessing the severity of robot security vulnerabilities, the Robot Vulnerability Scoring System (RVSS)"
+  authors:
+    - given-names: Víctor
+      family-names: Mayoral Vilches
+    - given-names: Endika
+      family-names: Gil-Uriarte
+    - given-names: Irati
+      family-names: Zamalloa Ugarte
+    - given-names: Gorka
+      family-names: Olalde Mendia
+    - given-names: Rodrigo
+      family-names: Izquierdo Pisón
+    - given-names: Laura
+      family-names: Alzola Kirschgens
+    - given-names: Asier
+      family-names: Bilbao Calvo
+    - given-names: Alejandro
+      family-names: Hernández Cordero
+    - given-names: Lucas
+      family-names: Apa
+    - given-names: César
+      family-names: Cerrudo
+  year: 2018
+  journal: arXiv
+  url: https://arxiv.org/abs/1807.10357

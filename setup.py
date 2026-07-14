@@ -15,6 +15,9 @@ setup(
     version='0.5.5',
     packages=['cvsslib', 'cvsslib.cvss2', 'cvsslib.cvss3', 'cvsslib.rvss', 'cvsslib.contrib'],
     url='https://github.com/ctxis/cvsslib',
+    project_urls={
+        'RVSS research': 'https://cybersecurityrobotics.com/research/rvss-robot-vulnerability-scoring-system/',
+    },
     license='GPL',
     author='Tom',
     author_email='tom.forbes@contextis.co.uk',
